@@ -1,0 +1,20 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: "distributed-bitcoin-proof-of-work" 
+spec:
+  runPolicy: "Serial" 
+  triggers: 
+    - type: "ImageChange"
+  source: 
+    git:
+      uri: "https://github.com/aviarytech/distributed-bitcoin-proof-of-work.git"
+  strategy: 
+    sourceStrategy:
+      from:
+        kind: "ImageStreamTag"
+        name: "elixir:1.6"
+  output: 
+    to:
+      kind: "ImageStreamTag"
+      name: "distributed-bitcoin-proof-of-work:latest"
